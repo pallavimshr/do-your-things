@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {ACTIONS} from './App';
 
-function ToDoItem(props){
-
-    const [isDone,setDone]=useState(false);
-    function handleClick(){
-        setDone(prevValue=>{
-            return !prevValue;
-        })
-
-    }
-
-
-    return(
-    <div onClick={handleClick}>
-         <li style={{textDecoration: isDone ?"line-through":"none"}}>{props.text}</li>
+function ToDoItem({todo,dispatch}){
+ return(
+    <div onClick ={()=>dispatch( {type: ACTIONS.DONE_TODO, payload :{id:todo.id}})}>
+         <li> <p style={{textDecoration: todo.complete ?"line-through":"none"}}> {todo.inputText}</p>
+         <button> <span className='todo' onClick ={()=>dispatch( {type: ACTIONS.DELETE_TODO, payload :{id:todo.id}})} >Delete </span></button> </li>
+        
          </div>);
 
 }
